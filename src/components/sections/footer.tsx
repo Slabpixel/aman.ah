@@ -4,7 +4,7 @@ import Image from "next/image"
 
 export default function Footer() {
     return (
-        <footer className="flex flex-col gap-8 h-192">
+        <footer className="relative flex flex-col gap-8 h-192">
             <Container className="h-112 border-b py-0 md:py-0 px-0 md:px-0 xl:px-0">
                 <div className="grid grid-cols-2 h-full">
                     <div className="flex flex-col">
@@ -101,6 +101,7 @@ export default function Footer() {
                     <Link href="/">Terms of Service</Link>
                 </div>
             </Container>
+            <Image src="/gradient-bottom.svg" alt="Aman.ah" width={1440} height={200} className="w-full mx-auto absolute bottom-0" />
         </footer>
     )
 }
