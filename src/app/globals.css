@@ -5,6 +5,9 @@
   --foreground: #101010;
   --muted: #f9f9f9;
   --border: #033f3633;
+  --primary: #005ffb;
+  --secondary: #c3fc29;
+  --input: #e9e9e9;
 }
 
 @theme inline {
@@ -12,6 +15,9 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-input: var(--input);
   --font-sans: var(--font-sf-pro);
 }
 
