@@ -6,7 +6,7 @@ import AppStore from "../../../public/appstore.svg";
 export default function CtaSection() {
   return (
     <section className="relative flex flex-col justify-between bg-background h-225 px-5 lg:px-17.5 overflow-hidden">
-      <div className="relative mx-auto bg-background w-full max-w-325 border-x border-border px-4 md:px-16 xl:px-17.5  py-16">
+      <div className="relative mx-auto bg-background w-full max-w-325 border-x border-border px-4 lg:px-16 xl:px-17.5  py-16">
         <Image src="/grid-bg.svg" alt="Grid Background" fill />
         <div className="relative text-center flex flex-col items-center gap-6">
           <h2 className="text-[clamp(3rem,8vw,5rem)] tracking-[-0.03em]">
@@ -22,7 +22,7 @@ export default function CtaSection() {
               <AppStore />
             </Link>
           </div>
-          <div className="flex w-full items-center justify-center gap-5">
+          <div className="flex max-md:flex-col md:w-full md:items-center md:justify-center gap-5">
             <div className="flex gap-2.5 shrink-0">
               <div className="aspect-square size-9 rounded bg-[#F1F1F1] flex items-center justify-center">
                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -124,9 +124,10 @@ export default function CtaSection() {
       </div>
       <div className="absolute inset-0 flex grow justify-stretch items-end">
         <div className="relative w-full h-full flex flex-col justify-end items-center">
-          <Image src="/hero-gradient.png" alt="Hero Gradient" width={2000} height={100} className="absolute h-1/2 object-cover object-top min-w-500 mx-auto" />
+          <Image src="/hero-gradient.png" alt="Hero Gradient" width={2000} height={100} className="absolute max-md:hidden h-1/2 object-cover object-top min-w-500 mx-auto" />
+          <Image src="/hero-gradient-alt.png" alt="Hero Gradient" width={768} height={100} className="absolute md:hidden h-1/2 object-cover object-top min-w-3xl mx-auto" />
           <Image src="/hero-accent.svg" alt="Hero Accent" width={1440} height={100} className="absolute h-1/2 object-cover object-top mx-auto w-full" />
-          <Image src="/cards.svg" alt="Cards" width={1162} height={328} className="absolute" />
+          <Image src="/cards.svg" alt="Cards" width={1162} height={328} className="absolute min-h-80 object-cover" />
         </div>
       </div>
     </section>

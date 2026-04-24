@@ -4,11 +4,11 @@ import Image from "next/image"
 
 export default function Footer() {
     return (
-        <footer className="relative flex flex-col gap-8 h-192">
-            <Container className="h-112 border-b py-0 md:py-0 px-0 md:px-0 xl:px-0">
-                <div className="grid grid-cols-2 h-full">
+        <footer className="relative flex flex-col gap-8 h-256 lg:h-192">
+            <Container className="min-h-112 border-b py-0 md:py-0 px-0 md:px-0 xl:px-0">
+                <div className="lg:grid flex flex-col-reverse lg:flex-row lg:grid-cols-2 h-full">
                     <div className="flex flex-col">
-                        <div className="relative grow">
+                        <div className="relative max-lg:min-h-80 max-lg:border-t border-border grow">
                             <Image src="/grid-bg.svg" alt="Aman.ah" fill />
                         </div>
                         <div className="p-3 border-t border-border flex justify-between">
@@ -38,7 +38,7 @@ export default function Footer() {
                         </div>
                     </div>
                     <div className="border-l border-border flex flex-col">
-                        <div className="p-7.5 grow flex items-end">
+                        <div className="p-6 min-h-42 lg:p-7.5 grow flex items-end">
                             <svg width="590" height="78" viewBox="0 0 590 78" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect y="21" width="56" height="56" rx="5.6" fill="url(#paint0_linear_4879_12828)" />
                                 <path d="M48.3003 64.1199C48.3003 66.5941 46.2946 68.5999 43.8203 68.5999H18.8358L48.3003 40.8799L9.10034 68.449V33.8799C9.10034 31.4057 11.1061 29.3999 13.5803 29.3999H43.8203C46.2946 29.3999 48.3003 31.4057 48.3003 33.8799V64.1199Z" fill="white" />
@@ -57,7 +57,7 @@ export default function Footer() {
                             </svg>
 
                         </div>
-                        <div className="border-t border-border p-7.5 flex justify-between">
+                        <div className="border-t grid grid-cols-2 gap-4  border-border p-6 min-h-42 lg:p-7.5 lg:flex justify-between">
                             <div className="flex flex-col gap-6">
                                 <p className="text-[1.0625rem] font-bold leading-[1.2]">Product</p>
                                 <div className="flex flex-col gap-1 leading-[1.6] tracking-[-0.02em] text-sm text-foreground/80">
@@ -94,14 +94,14 @@ export default function Footer() {
                     </div>
                 </div>
             </Container>
-            <Container className="border-0 flex justify-between gap-4 px-0 md:px-0 xl:px-0 py-0 md:py-0 text-foreground/60 leading-normal tracking-[-0.02em] text-sm">
+            <Container className="border-0 flex max-lg:flex-col max-lg:items-center justify-between gap-4 px-0 md:px-0 xl:px-0 py-0 md:py-0 text-foreground/60 leading-normal tracking-[-0.02em] text-sm">
                 <p>© 2025 aman.ah Technologies.</p>
-                <div className="flex gap-4">
+                <div className="flex  gap-4">
                     <Link href="/">Privacy Policy</Link>
                     <Link href="/">Terms of Service</Link>
                 </div>
             </Container>
-            <Image src="/gradient-bottom.svg" alt="Aman.ah" width={1440} height={200} className="w-full mx-auto absolute bottom-0" />
+            <Image src="/gradient-bottom.svg" alt="Aman.ah" width={1440} height={200} className="w-full mx-auto absolute bottom-0 2xl:max-h-100" />
         </footer>
     )
 }

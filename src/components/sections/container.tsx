@@ -10,10 +10,10 @@ export default function Container({
   className?: string;
 }) {
   return (
-    <section className={cn("relative bg-background px-5 lg:px-17.5", parentClassName)}>
+    <section className={cn("relative overflow-hidden bg-background px-5 lg:px-17.5", parentClassName)}>
       <div
         className={cn(
-          "mx-auto w-full max-w-325 border-x border-border px-4 py-16 md:px-16 xl:px-17.5 md:py-20",
+          "mx-auto w-full max-w-325 border-x border-border px-4 py-16 lg:px-16 xl:px-17.5 md:py-20",
           className,
         )}
       >

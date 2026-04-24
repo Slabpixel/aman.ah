@@ -5,11 +5,11 @@ import Image from "next/image";
 
 export default function HeroSection() {
     return (
-        <section className="relative flex flex-col justify-between bg-background min-h-200 h-dvh max-h-250 px-5 lg:px-17.5 overflow-hidden">
-            <div className="relative mx-auto bg-background w-full max-w-325 border-x border-border px-4 md:px-16 xl:px-17.5  py-30">
+        <section className="relative flex flex-col justify-between bg-background min-h-210 h-dvh max-h-250 px-5 lg:px-17.5 overflow-hidden">
+            <div className="relative mx-auto bg-background w-full max-w-325 border-x border-border px-4 lg:px-16 xl:px-17.5  py-30">
                 <Image src="/grid-bg.svg" alt="Grid Background" fill />
                 <div className="relative z-2 flex flex-col items-center gap-6">
-                    <h1 className="relative text-[5rem] tracking-[-0.04em] text-center bg-linear-to-r from-30% from-foreground to-foreground/60 bg-clip-text text-transparent">
+                    <h1 className="relative text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[5rem] tracking-[-0.04em] text-center bg-linear-to-r from-30% from-foreground to-foreground/60 bg-clip-text text-transparent">
                         Where Every Cent
                         <br />
                         <span className="text-foreground">
@@ -28,10 +28,11 @@ export default function HeroSection() {
             </div>
             <div className="absolute inset-0 flex grow justify-stretch items-end">
                 <div className="relative w-full h-full flex flex-col justify-end items-center">
-                    <Image src="/hero-gradient.png" alt="Hero Gradient" width={2000} height={100} className="absolute h-1/2 object-cover object-top min-w-500 mx-auto" />
+                    <Image src="/hero-gradient.png" alt="Hero Gradient" width={2000} height={100} className="absolute max-md:hidden h-1/2 object-cover object-top min-w-500 mx-auto" />
+                    <Image src="/hero-gradient-alt.png" alt="Hero Gradient" width={768} height={100} className="absolute md:hidden h-3/5 object-cover object-top min-w-3xl mx-auto" />
                     <Image src="/hero-accent.svg" alt="Hero Accent" width={1440} height={100} className="absolute h-1/2 object-cover object-top mx-auto w-full" />
                     <span className="absolute h-1/2 w-full mx-auto object-contain flex justify-center items-center pt-20">
-                        <svg width="1439" height="385" viewBox="0 0 1439 385" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg className="min-w-370" width="1439" height="385" viewBox="0 0 1439 385" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <mask id="mask0_4879_11675" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="-1" y="0" width="1440" height="385">
                                 <rect x="-1" width="1440" height="385" fill="url(#paint0_linear_4879_11675)" />
                             </mask>
@@ -55,9 +56,18 @@ export default function HeroSection() {
                         </svg>
 
                     </span>
-                    <img src="/hero-phone.png" alt="Hero Phone" className="absolute object-contain md:w-[50vh] max-w-lg" />
-                    <div className="flex gap-3 items-center pb-20">
-                        <div className="flex items-center gap-2 py-2 pl-2.5 pr-3 bg-background/10 backdrop-blur-xs rounded-md">
+                    <img
+                        src="/hero-phone-alt.png"
+                        alt="Hero Phone"
+                        className="absolute object-contain mb-10 w-[90%] max-w-80 md:hidden"
+                    />
+                    <img
+                        src="/hero-phone.png"
+                        alt="Hero Phone"
+                        className="absolute hidden object-contain w-full max-w-lg md:block md:w-[50vh]"
+                    />
+                    <div className="flex px-4 max-sm:flex-col gap-1.75 md:gap-3 items-center pb-11 lg:pb-20 text-sm lg:text-base">
+                        <div className="flex items-center gap-2 py-1.5 pl-1.5 pr-2 md:py-2 md:pl-2.5 md:pr-3 bg-background/10 backdrop-blur-xs rounded-md">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="18" height="18" rx="6" fill="white" />
                                 <path d="M4.5 5H5H13H13.5V5.5V8.89062C13.2344 8.65625 12.875 8.5 12.5 8.5V6H5.5V8.5C5.10938 8.5 4.76562 8.65625 4.5 8.89062V5.5V5ZM4.5 10C4.5 9.65625 4.6875 9.32812 5 9.14062C5.29688 8.96875 5.6875 8.96875 6 9.14062C6.29688 9.32812 6.5 9.65625 6.5 10C6.5 10.3594 6.29688 10.6875 6 10.875C5.6875 11.0469 5.29688 11.0469 5 10.875C4.6875 10.6875 4.5 10.3594 4.5 10ZM8 10C8 9.65625 8.1875 9.32812 8.5 9.14062C8.79688 8.96875 9.1875 8.96875 9.5 9.14062C9.79688 9.32812 10 9.65625 10 10C10 10.3594 9.79688 10.6875 9.5 10.875C9.1875 11.0469 8.79688 11.0469 8.5 10.875C8.1875 10.6875 8 10.3594 8 10ZM12.5 9C12.8438 9 13.1719 9.20312 13.3594 9.5C13.5312 9.8125 13.5312 10.2031 13.3594 10.5C13.1719 10.8125 12.8438 11 12.5 11C12.1406 11 11.8125 10.8125 11.625 10.5C11.4531 10.2031 11.4531 9.8125 11.625 9.5C11.8125 9.20312 12.1406 9 12.5 9ZM10.5 13H7.5L8 11.5H10L10.5 13ZM4.5 11.5H6.5L7 13H4L4.5 11.5ZM14 13H11L11.5 11.5H13.5L14 13Z" fill="#101010" />
@@ -66,7 +76,7 @@ export default function HeroSection() {
                                 Transaction Monitoring
                             </span>
                         </div>
-                        <div className="flex items-center gap-2 py-2 pl-2.5 pr-3 bg-background/10 backdrop-blur-xs rounded-md">
+                        <div className="flex items-center gap-2 py-1.5 pl-1.5 pr-2 md:py-2 md:pl-2.5 md:pr-3 bg-background/10 backdrop-blur-xs rounded-md">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="18" height="18" rx="6" fill="white" />
                                 <path d="M6.04688 6.3125C6.76562 5.51562 7.82812 5 9 5C11.2031 5 13 6.79688 13 9C13 11.2188 11.2031 13 9 13C8.14062 13 7.35938 12.7344 6.70312 12.2969L7.28125 11.4688C7.76562 11.8125 8.35938 12 9 12C10.6562 12 12 10.6562 12 9C12 7.34375 10.6562 6 9 6C8.09375 6 7.29688 6.39062 6.75 7.01562L7.75 8H5V5.25L6.04688 6.3125ZM9.375 7H9.35938V7.375V8.84375L10.25 9.73438L10.5156 10L10 10.5312L9.73438 10.2656L8.73438 9.26562L8.625 9.15625V9V7.375V7H9.375Z" fill="#101010" />
@@ -76,7 +86,7 @@ export default function HeroSection() {
                                 Audit Trail & Logging
                             </span>
                         </div>
-                        <div className="flex items-center gap-2 py-2 pl-2.5 pr-3 bg-background/10 backdrop-blur-xs rounded-md">
+                        <div className="flex items-center gap-2 py-1.5 pl-1.5 pr-2 md:py-2 md:pl-2.5 md:pr-3 bg-background/10 backdrop-blur-xs rounded-md">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="18" height="18" rx="6" fill="white" />
                                 <path d="M10.375 5.875L10 6.25L11.75 8L12.125 7.625L13 8.5L10.75 10.75L9.875 9.875L10.25 9.5L8.5 7.75L8.125 8.125L7.25 7.25L9.5 5L10.375 5.875ZM8.34375 10.3594L8.625 10.625L6.25 13L5 11.75L7.375 9.375L7.64062 9.65625L8.65625 8.625L9.375 9.34375L8.34375 10.3594Z" fill="#101010" />
