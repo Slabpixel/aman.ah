@@ -1,22 +1,92 @@
+'use client'
+
 import PlayStore from "../../../public/playstore.svg";
 import AppStore from "../../../public/appstore.svg";
 import Link from "next/link";
 import Image from "next/image";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { useRevealGate } from "@/providers/reveal-provider";
+
+gsap.registerPlugin(useGSAP);
 
 export default function HeroSection() {
+    const scopeRef = useRef<HTMLElement | null>(null);
+    const { isPreloaderDone } = useRevealGate();
+
+    useGSAP(
+        () => {
+            const revealTargets = [
+                "[data-hero-title]",
+                "[data-hero-stores]",
+                "[data-hero-phone]",
+                "[data-hero-pills]",
+            ];
+
+            gsap.set(revealTargets, { autoAlpha: 0, y: 24 });
+
+            if (!isPreloaderDone) return;
+
+            const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+            tl.fromTo(
+                "[data-hero-title]",
+                { autoAlpha: 0, y: 24 },
+                {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 0.7,
+                },
+            )
+                .fromTo(
+                    "[data-hero-stores]",
+                    { autoAlpha: 0, y: 24 },
+                    {
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: 0.6,
+                    },
+                    "-=0.35",
+                )
+                .fromTo(
+                    "[data-hero-phone]",
+                    { autoAlpha: 0, y: 26, scale: 0.965 },
+                    {
+                        autoAlpha: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 0.8,
+                    },
+                    "-=0.2",
+                )
+                .fromTo(
+                    "[data-hero-pills]",
+                    { autoAlpha: 0, y: 24 },
+                    {
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: 0.55,
+                    },
+                    "-=0.4",
+                );
+        },
+        { scope: scopeRef, dependencies: [isPreloaderDone], revertOnUpdate: true },
+    );
+
     return (
-        <section className="relative flex flex-col justify-between bg-background min-h-210 h-dvh max-h-250 px-5 lg:px-17.5 overflow-hidden">
+        <section ref={scopeRef} className="relative flex flex-col justify-between bg-background min-h-210 h-dvh max-h-250 px-5 lg:px-17.5 overflow-hidden">
             <div className="relative mx-auto bg-background w-full max-w-325 border-x border-border px-4 lg:px-16 xl:px-17.5  py-30">
                 <Image src="/grid-bg.svg" alt="Grid Background" fill />
                 <div className="relative z-2 flex flex-col items-center gap-6">
-                    <h1 className="relative text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[5rem] tracking-[-0.04em] text-center bg-linear-to-r from-30% from-foreground to-foreground/60 bg-clip-text text-transparent">
+                    <h1 data-hero-title className="relative text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[5rem] tracking-[-0.04em] text-center bg-linear-to-r from-30% from-foreground to-foreground/60 bg-clip-text text-transparent">
                         Where Every Cent
                         <br />
                         <span className="text-foreground">
                             Has a Signature
                         </span>
                     </h1>
-                    <div className="flex items-center gap-2.5">
+                    <div data-hero-stores className="flex items-center gap-2.5">
                         <Link className="hover:scale-105 transition-all duration-300 ease-in-out active:scale-90" href="https://play.google.com/" target="_blank">
                             <PlayStore />
                         </Link>
@@ -60,13 +130,15 @@ export default function HeroSection() {
                         src="/hero-phone-alt.png"
                         alt="Hero Phone"
                         className="absolute object-contain mb-10 w-[90%] max-w-80 md:hidden"
+                        data-hero-phone
                     />
                     <img
                         src="/hero-phone.png"
                         alt="Hero Phone"
                         className="absolute hidden object-contain w-full max-w-lg md:block md:w-[50vh]"
+                        data-hero-phone
                     />
-                    <div className="flex px-4 max-sm:flex-col gap-1.75 md:gap-3 items-center pb-11 lg:pb-20 text-sm lg:text-base">
+                    <div data-hero-pills className="flex px-4 max-sm:flex-col gap-1.75 md:gap-3 items-center pb-11 lg:pb-20 text-sm lg:text-base">
                         <div className="flex items-center gap-2 py-1.5 pl-1.5 pr-2 md:py-2 md:pl-2.5 md:pr-3 bg-background/10 backdrop-blur-xs rounded-md">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="18" height="18" rx="6" fill="white" />

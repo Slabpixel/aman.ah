@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "@/components/navbar";
+import AppShell from "@/components/app-shell";
+import { Provider } from "@/providers/provider";
+import { RevealProvider } from "@/providers/reveal-provider";
 
 const sfPro = localFont({
   src: "./fonts/sf-pro-medium.woff2",
@@ -22,8 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${sfPro.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        {children}
+        <Provider>
+          <RevealProvider>
+            <AppShell>{children}</AppShell>
+          </RevealProvider>
+        </Provider>
       </body>
     </html>
   );

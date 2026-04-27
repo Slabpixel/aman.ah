@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Navbar() {
     return (
-        <nav className="fixed top-4 md:top-5 inset-x-0 z-99 px-10 lg:px-4">
+        <nav data-navbar className="fixed top-4 md:top-5 inset-x-0 z-99 px-10 lg:px-4">
             <div className="mx-auto bg-foreground p-2 flex justify-between gap-10 w-full max-w-182.5 items-center rounded-md tracking-[-0.03em] overflow-hidden">
                 <Link href="/" className="shrink-0">
                     <Image src="/icon-frame.svg" alt="Aman.ah" width={40} height={40} />
