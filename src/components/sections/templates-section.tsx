@@ -1,4 +1,5 @@
 import Container from "@/components/sections/container";
+import StaggerText from "@/components/stagger-text";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -62,15 +63,15 @@ export default function TemplatesSection() {
               </div>
             </div>
             <div className="mt-6 flex gap-2 px-5 pb-5">
-              <Link href="#" className="rounded-[3px] bg-foreground py-1.5 px-2 text-[0.8125rem] text-background flex gap-2 items-center">
-                Use template
+              <Link href="#" className="group rounded-[3px] bg-foreground py-1.5 px-2 text-[0.8125rem] text-background flex gap-2 items-center">
+                <StaggerText text="Use template" />
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect width="14" height="14" rx="7" fill="white" fillOpacity="0.1" />
                   <path d="M7.45653 4.26075V6.54336H9.73914C9.99593 6.54336 10.1957 6.74309 10.1957 6.99988C10.1957 7.25668 9.99593 7.4564 9.73914 7.4564H7.45653V9.73901C7.45653 9.99581 7.2568 10.1955 7 10.1955C6.74321 10.1955 6.54348 9.99581 6.54348 9.73901V7.4564H4.26087C4.00408 7.4564 3.80435 7.25668 3.80435 6.99988C3.80435 6.74309 4.00408 6.54336 4.26087 6.54336H6.54348V4.26075C6.54348 4.00396 6.74321 3.80423 7 3.80423C7.2568 3.80423 7.45653 4.00396 7.45653 4.26075Z" fill="white" />
                 </svg>
               </Link >
-              <Link href="#" className="rounded-[3px] bg-background py-1.5 px-2 flex gap-2 items-center text-[0.8125rem]">
-                See Example
+              <Link href="#" className="group rounded-[3px] bg-background py-1.5 px-2 flex gap-2 items-center text-[0.8125rem]">
+                <StaggerText text="See Example" />
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect width="14" height="14" rx="7" fill="#101010" fillOpacity="0.1" />
                   <path d="M9.15422 6.67176C9.33968 6.85722 9.33968 7.14255 9.15422 7.32801L6.41509 10.0671C6.24389 10.2383 5.9443 10.2383 5.7731 10.0671C5.58764 9.88168 5.58764 9.59635 5.7731 9.41089L8.18411 6.99988L5.7731 4.58888C5.58764 4.40342 5.58764 4.11809 5.7731 3.93263C5.9443 3.76143 6.24389 3.76143 6.41509 3.93263L9.15422 6.67176Z" fill="#101010" />
@@ -84,14 +85,14 @@ export default function TemplatesSection() {
       <div className="absolute bottom-0 mx-auto w-full left-1/2 max-w-324 -translate-x-1/2 h-58.5 bg-linear-to-t from-45% from-background to-background/0" />
       <div className="absolute h-12 px-4 inset-x-0 z-5 bottom-22 flex justify-center gap-2">
         <div className="p-2 rounded-md h-full max-md:w-full max-md:overflow-x-scroll items-center text-nowrap bg-foreground flex gap-2">
-          <Link className="py-2 px-4 rounded-xs text-background bg-background/20" href="#">All</Link>
-          <Link className="py-2 px-2 rounded-xs text-background/60 hover:text-background hover:bg-background/20" href="#">Cash Flow</Link>
-          <Link className="py-2 px-2 rounded-xs text-background/60 hover:text-background hover:bg-background/20" href="#">Audit-Ready</Link>
-          <Link className="py-2 px-2 rounded-xs text-background/60 hover:text-background hover:bg-background/20" href="#">Budgeting</Link>
-          <Link className="py-2 px-2 rounded-xs text-background/60 hover:text-background hover:bg-background/20" href="#">Forecasting</Link>
-          <Link className="py-2 px-2 rounded-xs text-background/60 hover:text-background hover:bg-background/20" href="#">Small Business</Link>
+          <Link className="group py-2 px-4 rounded-xs text-background bg-background/20" href="#"><StaggerText text="All" /></Link>
+          <Link className="group py-2 px-2 rounded-xs text-background/60 hover:text-background hover:bg-background/20" href="#"><StaggerText text="Cash Flow" /></Link>
+          <Link className="group py-2 px-2 rounded-xs text-background/60 hover:text-background hover:bg-background/20" href="#"><StaggerText text="Audit-Ready" /></Link>
+          <Link className="group py-2 px-2 rounded-xs text-background/60 hover:text-background hover:bg-background/20" href="#"><StaggerText text="Budgeting" /></Link>
+          <Link className="group py-2 px-2 rounded-xs text-background/60 hover:text-background hover:bg-background/20" href="#"><StaggerText text="Forecasting" /></Link>
+          <Link className="group py-2 px-2 rounded-xs text-background/60 hover:text-background hover:bg-background/20" href="#"><StaggerText text="Small Business" /></Link>
         </div>
-        <button className="p-2 shrink-0 flex items-center justify-center aspect-square rounded-md bg-foreground">
+        <button className="p-2 shrink-0 flex items-center justify-center aspect-square rounded-md bg-foreground cursor-pointer">
           <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1.09379 0L15.0938 0C15.5 0 15.875 0.25 16.0313 0.625C16.1875 1 16.0938 1.4375 15.8125 1.71875L10.0938 7.40625V13C10.0938 13.4062 9.84379 13.7812 9.46879 13.9375C9.09379 14.0938 8.68754 14 8.37504 13.7188L6.37504 11.7188C6.18754 11.5312 6.09379 11.2812 6.09379 11L6.09379 7.40625L0.375042 1.71875C0.093792 1.4375 4.19617e-05 1 0.156292 0.625C0.312542 0.25 0.687542 0 1.09379 0Z" fill="white" />
           </svg>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Container from "@/components/sections/container";
+import StaggerText from "@/components/stagger-text";
 import Line from "../../../public/line.svg";
 
 export default function OversightSection() {
@@ -35,9 +36,9 @@ export default function OversightSection() {
                 </span>
               </div>
             </div>
-            <button className="flex gap-2.5 items-center rounded bg-foreground px-4 py-3 text-background">
-              Get Started
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <button className="group cursor-pointer flex gap-2.5 items-center rounded bg-foreground px-4 py-3 text-background">
+              <StaggerText text="Get Started" />
+              <svg className="transition-transform duration-300 group-hover:rotate-45" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="20" height="20" rx="10" fill="white" fillOpacity="0.1" />
                 <path d="M13.891 6.7719V11.3835C13.8766 11.7437 13.5884 12.032 13.2281 12.0464C12.8678 12.032 12.5796 11.7437 12.5652 11.3835L12.5796 8.34272L7.23304 13.6893C6.97364 13.9487 6.57013 13.9487 6.31073 13.6893C6.05133 13.4299 6.05133 13.0263 6.31073 12.7669L11.6573 7.4204L8.61651 7.43482C8.25623 7.4204 7.96801 7.13218 7.9536 6.7719C7.96801 6.41162 8.25623 6.1234 8.61651 6.10899H13.2281C13.5884 6.1234 13.8766 6.41162 13.891 6.7719Z" fill="white" />
               </svg>
@@ -152,9 +153,9 @@ export default function OversightSection() {
                 </span>
               </div>
             </div>
-            <button className="flex gap-2.5 items-center rounded bg-foreground px-4 py-3 text-background">
-              Get Started
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <button className="group cursor-pointer active:scale-95 transition-transform flex gap-2.5 items-center rounded bg-foreground px-4 py-3 text-background">
+              <StaggerText text="Get Started" />
+              <svg className="group-hover:rotate-45 transition-transform duration-300" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="20" height="20" rx="10" fill="white" fillOpacity="0.1" />
                 <path d="M13.891 6.7719V11.3835C13.8766 11.7437 13.5884 12.032 13.2281 12.0464C12.8678 12.032 12.5796 11.7437 12.5652 11.3835L12.5796 8.34272L7.23304 13.6893C6.97364 13.9487 6.57013 13.9487 6.31073 13.6893C6.05133 13.4299 6.05133 13.0263 6.31073 12.7669L11.6573 7.4204L8.61651 7.43482C8.25623 7.4204 7.96801 7.13218 7.9536 6.7719C7.96801 6.41162 8.25623 6.1234 8.61651 6.10899H13.2281C13.5884 6.1234 13.8766 6.41162 13.891 6.7719Z" fill="white" />
               </svg>

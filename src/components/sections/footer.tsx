@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Container from "./container"
 import Image from "next/image"
+import StaggerText from "@/components/stagger-text"
 
 export default function Footer() {
     return (
@@ -61,33 +62,33 @@ export default function Footer() {
                             <div className="flex flex-col gap-6">
                                 <p className="text-[1.0625rem] font-bold leading-[1.2]">Product</p>
                                 <div className="flex flex-col gap-1 leading-[1.6] tracking-[-0.02em] text-sm text-foreground/80">
-                                    <Link href="/">Corporate Ledger</Link>
-                                    <Link href="/">Gov-Gateway</Link>
-                                    <Link href="/">Automated Audit</Link>
+                                    <Link href="/" className="group"><StaggerText text="Corporate Ledger" /></Link>
+                                    <Link href="/" className="group"><StaggerText text="Gov-Gateway" /></Link>
+                                    <Link href="/" className="group"><StaggerText text="Automated Audit" /></Link>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-6">
                                 <p className="text-[1.0625rem] font-bold leading-[1.2]">Governance</p>
                                 <div className="flex flex-col gap-1 leading-[1.6] tracking-[-0.02em] text-sm text-foreground/80">
-                                    <Link href="/">Corporate Ledger</Link>
-                                    <Link href="/">Gov-Gateway</Link>
-                                    <Link href="/">Automated Audit</Link>
+                                    <Link href="/" className="group"><StaggerText text="Corporate Ledger" /></Link>
+                                    <Link href="/" className="group"><StaggerText text="Gov-Gateway" /></Link>
+                                    <Link href="/" className="group"><StaggerText text="Automated Audit" /></Link>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-6">
                                 <p className="text-[1.0625rem] font-bold leading-[1.2]">Resources</p>
                                 <div className="flex flex-col gap-1 leading-[1.6] tracking-[-0.02em] text-sm text-foreground/80">
-                                    <Link href="/">Corporate Ledger</Link>
-                                    <Link href="/">Gov-Gateway</Link>
-                                    <Link href="/">Automated Audit</Link>
+                                    <Link href="/" className="group"><StaggerText text="Corporate Ledger" /></Link>
+                                    <Link href="/" className="group"><StaggerText text="Gov-Gateway" /></Link>
+                                    <Link href="/" className="group"><StaggerText text="Automated Audit" /></Link>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-6">
                                 <p className="text-[1.0625rem] font-bold leading-[1.2]">Company</p>
                                 <div className="flex flex-col gap-1 leading-[1.6] tracking-[-0.02em] text-sm text-foreground/80">
-                                    <Link href="/">Corporate Ledger</Link>
-                                    <Link href="/">Gov-Gateway</Link>
-                                    <Link href="/">Automated Audit</Link>
+                                    <Link href="/" className="group"><StaggerText text="Corporate Ledger" /></Link>
+                                    <Link href="/" className="group"><StaggerText text="Gov-Gateway" /></Link>
+                                    <Link href="/" className="group"><StaggerText text="Automated Audit" /></Link>
                                 </div>
                             </div>
                         </div>
@@ -97,8 +98,8 @@ export default function Footer() {
             <Container className="border-0 flex max-lg:flex-col max-lg:items-center justify-between gap-4 px-0 md:px-0 xl:px-0 py-0 md:py-0 text-foreground/60 leading-normal tracking-[-0.02em] text-sm">
                 <p>© 2025 aman.ah Technologies.</p>
                 <div className="flex  gap-4">
-                    <Link href="/">Privacy Policy</Link>
-                    <Link href="/">Terms of Service</Link>
+                    <Link href="/" className="group"><StaggerText text="Privacy Policy" /></Link>
+                    <Link href="/" className="group"><StaggerText text="Terms of Service" /></Link>
                 </div>
             </Container>
             <Image src="/gradient-bottom.svg" alt="Aman.ah" width={1440} height={200} className="w-full mx-auto absolute bottom-0 2xl:max-h-100" />

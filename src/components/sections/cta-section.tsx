@@ -6,7 +6,7 @@ import AppStore from "../../../public/appstore.svg";
 export default function CtaSection() {
   return (
     <section className="relative flex flex-col justify-between bg-background h-225 px-5 lg:px-17.5 overflow-hidden">
-      <div className="relative mx-auto bg-background w-full max-w-325 border-x border-border px-4 lg:px-16 xl:px-17.5  py-16">
+      <div className="relative z-1 mx-auto bg-background w-full max-w-325 border-x border-border px-4 lg:px-16 xl:px-17.5  py-16">
         <Image src="/grid-bg.svg" alt="Grid Background" fill />
         <div className="relative text-center flex flex-col items-center gap-6">
           <h2 className="text-[clamp(3rem,8vw,5rem)] tracking-[-0.03em]">

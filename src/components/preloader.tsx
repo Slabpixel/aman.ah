@@ -21,7 +21,6 @@ export default function Preloader() {
 
             const splitText = new SplitText('[data-preloader-text]', {
                 type: 'chars',
-                mask: 'chars',
             })
 
             const tl = gsap.timeline({
@@ -51,12 +50,12 @@ export default function Preloader() {
                     },
                     
                 ).from(splitText.chars, {
-                    x: 32,
+                    x: 16,
                     autoAlpha: 0,
-                    stagger: 0.07,  
+                    stagger: 0.1,  
                     duration: 0.5,
                     ease: 'power4.inOut',
-                }, '-=0.5')
+                }, '<-0.1')
                 .to('[data-preloader-container]', {
                     autoAlpha: 0,
                     scale: 2,
@@ -91,7 +90,7 @@ export default function Preloader() {
                         className="h-auto w-auto max-w-[52vw] blur-xs scale-200"
                     />
                     <div data-preloader-text className='overflow-hidden w-0'>
-                        <p className="pl-4 text-4xl font-bold text-nowrap">
+                        <p className="pl-6 text-5xl font-bold text-nowrap">
                             aman.ah
                         </p>
                     </div>
