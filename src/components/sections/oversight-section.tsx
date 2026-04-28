@@ -1,9 +1,17 @@
+"use client";
+
 import Image from "next/image";
 import Container from "@/components/sections/container";
 import StaggerText from "@/components/stagger-text";
 import Line from "../../../public/line.svg";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function OversightSection() {
+
   return (
     <Container className="relative lg:px-12 xl:px-12.5">
       <div className="rounded-2xl bg-muted p-6 md:p-10 lg:p-15 xl:p-25 flex flex-col gap-25">

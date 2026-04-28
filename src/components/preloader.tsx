@@ -65,7 +65,7 @@ export default function Preloader() {
                 })
                 .to('[data-preloader-overlay]', {
                     autoAlpha: 0,
-                    duration: 0.7,
+                    duration: 0.25,
                     ease: 'power4.inOut',
                 })
                 .set('[data-preloader-overlay]', { pointerEvents: 'none' })

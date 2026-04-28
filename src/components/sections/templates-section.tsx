@@ -1,7 +1,15 @@
+ 'use client'
+
 import Container from "@/components/sections/container";
 import StaggerText from "@/components/stagger-text";
 import Link from "next/link";
 import Image from "next/image";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const templates = [
   {
@@ -31,6 +39,37 @@ const templates = [
 ];
 
 export default function TemplatesSection() {
+  const gridRef = useRef<HTMLDivElement | null>(null);
+
+  useGSAP(
+    () => {
+      if (!gridRef.current) return;
+
+      const columnOffsets = [-40, -128, -320];
+      const columnTravel = [-120, 100, -180];
+      const cards = gsap.utils.toArray<HTMLElement>("[data-template-card]");
+
+      cards.forEach((card, index) => {
+        const column = index % 3;
+        const startY = columnOffsets[column];
+        const endY = startY + columnTravel[column];
+
+        gsap.set(card, { y: startY });
+        gsap.to(card, {
+          y: endY,
+          ease: "none",
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      });
+    },
+    { scope: gridRef, revertOnUpdate: true },
+  );
+
   return (
     <Container className="md:py-23 flex flex-col items-center">
       <div className="relative z-2 flex flex-col items-center gap-4 md:gap-6 max-w-200">
@@ -40,11 +79,13 @@ export default function TemplatesSection() {
         <p className="opacity-80 text-base md:text-lg tracking-[-0.02em] leading-normal">Model-Based & Fully Customizable</p>
       </div>
       <div
-        className="relative left-1/2 -translate-x-1/2 mx-auto grid items-center justify-center gap-6 max-h-150 w-max min-w-250 grid-cols-3 justify-items-center [&>article]:w-[337px] [&>article:nth-child(3n+1)]:-translate-y-10 [&>article:nth-child(3n+2)]:-translate-y-32 [&>article:nth-child(3n+3)]:-translate-y-80"
+        ref={gridRef}
+        className="relative left-1/2 -translate-x-1/2 mx-auto grid items-center justify-center gap-6 max-h-150 w-max min-w-250 grid-cols-3 justify-items-center [&>article]:w-[337px]"
       >
         {templates.map((card, idx) => (
           <article
             key={`${card.title}-${idx}`}
+            data-template-card
             className="rounded-lg bg-muted transition-transform"
           >
             <Image src="/card-g.svg" alt="template" width={337} height={300} />
