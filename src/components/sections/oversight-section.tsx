@@ -4,19 +4,61 @@ import Image from "next/image";
 import Container from "@/components/sections/container";
 import StaggerText from "@/components/stagger-text";
 import Line from "../../../public/line.svg";
+import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import ScrollTrigger from "gsap/ScrollTrigger";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function OversightSection() {
+  const scopeRef = useRef<HTMLDivElement | null>(null);
+
+  useGSAP(
+    () => {
+      const wrappers = gsap.utils.toArray<HTMLElement>("[data-anim-wrapper]");
+
+      wrappers.forEach((wrapper) => {
+        const image = wrapper.querySelector<HTMLElement>("[data-image-reveal]");
+        const text = wrapper.querySelector<HTMLElement>("[data-text-reveal]");
+        if (!image || !text) return;
+
+        const tl = gsap.timeline({
+          defaults: { ease: "power2.inOut" },
+          scrollTrigger: {
+            trigger: wrapper,
+            start: "top 85%",
+            end: "bottom bottom",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        tl.fromTo(
+          image,
+          { clipPath: "inset(50% 50% 50% 50% round 10px)" },
+          { clipPath: "inset(0% 0% 0% 0% round 10px)", duration: 1.5 },
+        ).fromTo(
+          text,
+          {
+            clipPath: "inset(0% 100% 0% 0% )",
+          },
+          {
+            clipPath: "inset(0% 0% 0% 0% )",
+            duration: 1,
+          },
+          "-=0.35",
+        );
+      });
+    },
+    { scope: scopeRef, revertOnUpdate: true },
+  )
 
   return (
     <Container className="relative lg:px-12 xl:px-12.5">
+      <div ref={scopeRef}>
       <div className="rounded-2xl bg-muted p-6 md:p-10 lg:p-15 xl:p-25 flex flex-col gap-25">
-        <div className="flex flex-col-reverse md:flex-row justify-between gap-8">
-          <div className="max-w-140 flex flex-col items-start justify-between gap-4">
+        <div data-anim-wrapper className="flex flex-col-reverse md:flex-row justify-between gap-8">
+          <div data-text-reveal className="max-w-140 flex flex-col items-start justify-between gap-4">
             <div className="space-y-4">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[3.5rem] tracking-[-0.04em]">
                 <span className="text-transparent bg-linear-to-r from-10% from-foreground to-foreground/60 to-45% bg-clip-text">The Gold Standard for</span><br />
@@ -52,7 +94,8 @@ export default function OversightSection() {
               </svg>
             </button>
           </div>
-          <div className="relative overflow-hidden aspect-square w-full max-w-87.5 rounded-lg bg-background p-6">
+          <div
+            data-image-reveal className="relative overflow-hidden aspect-square w-full max-w-87.5 rounded-lg bg-background p-6">
             <Image
               src="/docs.svg"
               alt="Docs"
@@ -132,8 +175,8 @@ export default function OversightSection() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col-reverse md:flex-row-reverse justify-between gap-8">
-          <div className="max-w-140 flex flex-col items-start justify-between gap-4">
+        <div data-anim-wrapper className="flex flex-col-reverse md:flex-row-reverse justify-between gap-8">
+          <div data-text-reveal className="max-w-140 flex flex-col items-start justify-between gap-4">
             <div className="space-y-4">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[3.5rem] tracking-[-0.04em]">
                 <span className="text-transparent bg-linear-to-r from-10% from-foreground to-foreground/60 to-45% bg-clip-text">Radical Transparency.</span><br />
@@ -169,7 +212,8 @@ export default function OversightSection() {
               </svg>
             </button>
           </div>
-          <div className="relative aspect-square w-full max-w-87.5 rounded-lg bg-background p-6">
+          <div
+            data-image-reveal className="relative aspect-square w-full max-w-87.5 rounded-lg bg-background p-6">
             <Image
               src="/cursor.svg"
               alt="Cursor"
@@ -178,6 +222,7 @@ export default function OversightSection() {
             />
           </div>
         </div>
+      </div>
       </div>
     </Container>
   );
