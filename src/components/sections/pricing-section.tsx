@@ -8,6 +8,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
+import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 
 const features = [
   "Real-time Expense Tracking",
@@ -27,7 +28,7 @@ const enterpriseFeatures = [
   "Dedicated Priority Support",
 ];
 
-gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
+gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText, DrawSVGPlugin);
 
 export default function PricingSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -61,8 +62,53 @@ export default function PricingSection() {
         },
       });
 
+      gsap.from("[data-pricing-title]", {
+        xPercent: -100,
+        duration: 0.75,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 95%",
+          end: "bottom top",
+        },
+      });
+
+      gsap.from("[data-pricing-card='essential']", {
+        autoAlpha: 0,
+        xPercent: 100,
+        ease: "circ.inOut",
+        duration: 0.75,
+        scrollTrigger: {
+          trigger: "[data-pricing-cards]",
+          start: "top 95%",
+          end: "bottom top",
+        },
+      });
+
+      gsap.from("[data-pricing-card='governance']", {
+        autoAlpha: 0,
+        xPercent: -50,
+        yPercent: 50,
+        ease: "circ.inOut",
+        duration: 0.95,
+        scrollTrigger: {
+          trigger: "[data-pricing-cards]",
+          start: "top 80%",
+          end: "bottom top",
+        },
+      });
+
       return () => {
         split.revert();
+      gsap.from("[data-pricing-card='governance']", {
+        opacity: 0,
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: "[data-pricing-cards]",
+          start: "top 95%",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
       };
     },
     { scope: sectionRef, revertOnUpdate: true },
@@ -74,9 +120,11 @@ export default function PricingSection() {
         <div className="space-y-18 max-w-250 mx-auto">
           <div className="flex flex-col gap-8">
             <div className="flex max-lg:flex-col gap-4 items-center justify-between">
-              <h2 className=" text-[2.5rem] md:text-5xl xl:text-[3.5rem] text-center lg:text-left leading-none pb-2 grow tracking-[-0.04em] text-transparent bg-linear-to-r from-28% from-foreground to-foreground/60 bg-clip-text">
+              <div className="overflow-hidden">
+              <h2 data-pricing-title className=" text-[2.5rem] md:text-5xl xl:text-[3.5rem] text-center lg:text-left leading-none pb-2 grow tracking-[-0.04em] text-transparent bg-linear-to-r from-28% from-foreground to-foreground/60 bg-clip-text">
                 Transparent Pricing
               </h2>
+              </div>
 
               <label className="inline-flex gap-6 items-center cursor-pointer">
                 <span className="select-none text-xl tracking-[-0.02em] text-foreground/60">Monthly</span>
@@ -86,8 +134,8 @@ export default function PricingSection() {
               </label>
 
             </div>
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="rounded-xl bg-muted p-3 pb-4 md:p-4 flex flex-col gap-4 md:gap-6">
+            <div data-pricing-cards className="grid gap-4 md:grid-cols-2">
+              <div data-pricing-card="essential" className="rounded-xl bg-muted p-3 pb-4 md:p-4 flex flex-col gap-4 md:gap-6">
                 <div className="p-4 md:p-5 overflow-hidden flex flex-col justify-between items-start bg-white rounded gap-16 min-h-68">
                   <div className="flex flex-col gap-2.5">
                     <p className="text-foreground/60 tracking-[-0.04em]">Essential Plan</p>
@@ -130,7 +178,7 @@ export default function PricingSection() {
                   ))}
                 </div>
               </div>
-              <div className="relative overflow-hidden rounded-xl bg-muted p-3 pb-4 md:p-4 flex flex-col gap-4 md:gap-6">
+              <div data-pricing-card="governance" className="relative overflow-hidden rounded-xl bg-muted p-3 pb-4 md:p-4 flex flex-col gap-4 md:gap-6">
                 <Image src="/card-bg.svg" fill alt="Governance Plan" className="object-cover" />
                 <div className="relative overflow-hidden bg-background/50 backdrop-blur-xs border border-background/20 p-4 md:p-5 flex flex-col justify-between items-start rounded gap-16 min-h-68">
                   <div className="flex flex-col gap-2.5">

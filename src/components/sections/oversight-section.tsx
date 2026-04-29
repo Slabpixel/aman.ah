@@ -8,8 +8,9 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+gsap.registerPlugin(useGSAP, ScrollTrigger, DrawSVGPlugin);
 
 export default function OversightSection() {
   const scopeRef = useRef<HTMLDivElement | null>(null);
@@ -49,6 +50,66 @@ export default function OversightSection() {
           "-=0.35",
         );
       });
+
+      const matrix = scopeRef.current?.querySelector<HTMLElement>("[data-oversight-matrix]");
+      if (!matrix) return;
+
+      const phone = matrix.querySelector<HTMLElement>("[data-phone-reveal]");
+      const topCards = gsap.utils.toArray<HTMLElement>('[data-feature-tier="top"]');
+      const bottomCards = gsap.utils.toArray<HTMLElement>('[data-feature-tier="bottom"]');
+      const leftConnectorPaths = gsap.utils.toArray<SVGPathElement>("[data-connector-left] path");
+      const rightConnectorPaths = gsap.utils.toArray<SVGPathElement>("[data-connector-right] path");
+      const connectorPaths = [...leftConnectorPaths, ...rightConnectorPaths];
+
+      if (!phone || !topCards.length || !bottomCards.length || !connectorPaths.length) return;
+
+      gsap.set(phone, { y: 120, autoAlpha: 0 });
+      gsap.set([...topCards, ...bottomCards], { clipPath: "inset(0% 0% 100% 0%)" });
+      gsap.set(connectorPaths, { drawSVG: "50% 50%", autoAlpha: 1 });
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: matrix,
+          start: "top 85%",
+          end: "bottom 35%",
+        },
+      })
+      .to(phone, {
+        y: 0,
+        autoAlpha: 1,
+        duration: 1.1,
+        ease: "power2.out",
+      })
+      .to(
+        connectorPaths,
+        {
+          drawSVG: "0% 100%",
+          duration: 0.9,
+          ease: "none",
+          stagger: 0.06,
+        },
+        "-=0.4",
+      )
+      .to(
+        topCards,
+        {
+          clipPath: "inset(0% 0% 0% 0%)",
+          duration: 0.7,
+          ease: "power2.out",
+          stagger: 0.12,
+        },
+        "-=0.15",
+      )
+      .to(
+        bottomCards,
+        {
+          clipPath: "inset(0% 0% 0% 0%)",
+          duration: 0.7,
+          ease: "power2.out",
+          stagger: 0.12,
+        },
+        "-=0.05",
+      );
     },
     { scope: scopeRef, revertOnUpdate: true },
   )
@@ -104,10 +165,10 @@ export default function OversightSection() {
               />
             </div>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 max-lg:gap-4 items-center">
+          <div data-oversight-matrix className="grid grid-cols-1 lg:grid-cols-3 max-lg:gap-4 items-center">
             <div className="flex max-lg:flex-col gap-4 items-center lg:items-stretch">
               <div className="flex lg:flex-col gap-10 justify-between">
-                <div className="flex flex-col gap-0.5">
+                <div data-feature-tier="top" className="flex flex-col gap-0.5">
                   <svg className="mb-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="18" height="18" rx="6" fill="white" />
                     <path d="M4.5 5H5H13H13.5V5.5V8.89062C13.2344 8.65625 12.875 8.5 12.5 8.5V6H5.5V8.5C5.10938 8.5 4.76562 8.65625 4.5 8.89062V5.5V5ZM4.5 10C4.5 9.65625 4.6875 9.32812 5 9.14062C5.29688 8.96875 5.6875 8.96875 6 9.14062C6.29688 9.32812 6.5 9.65625 6.5 10C6.5 10.3594 6.29688 10.6875 6 10.875C5.6875 11.0469 5.29688 11.0469 5 10.875C4.6875 10.6875 4.5 10.3594 4.5 10ZM8 10C8 9.65625 8.1875 9.32812 8.5 9.14062C8.79688 8.96875 9.1875 8.96875 9.5 9.14062C9.79688 9.32812 10 9.65625 10 10C10 10.3594 9.79688 10.6875 9.5 10.875C9.1875 11.0469 8.79688 11.0469 8.5 10.875C8.1875 10.6875 8 10.3594 8 10ZM12.5 9C12.8438 9 13.1719 9.20312 13.3594 9.5C13.5312 9.8125 13.5312 10.2031 13.3594 10.5C13.1719 10.8125 12.8438 11 12.5 11C12.1406 11 11.8125 10.8125 11.625 10.5C11.4531 10.2031 11.4531 9.8125 11.625 9.5C11.8125 9.20312 12.1406 9 12.5 9ZM10.5 13H7.5L8 11.5H10L10.5 13ZM4.5 11.5H6.5L7 13H4L4.5 11.5ZM14 13H11L11.5 11.5H13.5L14 13Z" fill="#101010" />
@@ -117,7 +178,7 @@ export default function OversightSection() {
                     Transactions logged, every rupiah timestamped.
                   </p>
                 </div>
-                <div className="flex flex-col gap-0.5">
+                <div data-feature-tier="top" className="flex flex-col gap-0.5">
                   <svg className="mb-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="18" height="18" rx="6" fill="white" />
                     <path d="M4.5 5H5H13H13.5V5.5V8.89062C13.2344 8.65625 12.875 8.5 12.5 8.5V6H5.5V8.5C5.10938 8.5 4.76562 8.65625 4.5 8.89062V5.5V5ZM4.5 10C4.5 9.65625 4.6875 9.32812 5 9.14062C5.29688 8.96875 5.6875 8.96875 6 9.14062C6.29688 9.32812 6.5 9.65625 6.5 10C6.5 10.3594 6.29688 10.6875 6 10.875C5.6875 11.0469 5.29688 11.0469 5 10.875C4.6875 10.6875 4.5 10.3594 4.5 10ZM8 10C8 9.65625 8.1875 9.32812 8.5 9.14062C8.79688 8.96875 9.1875 8.96875 9.5 9.14062C9.79688 9.32812 10 9.65625 10 10C10 10.3594 9.79688 10.6875 9.5 10.875C9.1875 11.0469 8.79688 11.0469 8.5 10.875C8.1875 10.6875 8 10.3594 8 10ZM12.5 9C12.8438 9 13.1719 9.20312 13.3594 9.5C13.5312 9.8125 13.5312 10.2031 13.3594 10.5C13.1719 10.8125 12.8438 11 12.5 11C12.1406 11 11.8125 10.8125 11.625 10.5C11.4531 10.2031 11.4531 9.8125 11.625 9.5C11.8125 9.20312 12.1406 9 12.5 9ZM10.5 13H7.5L8 11.5H10L10.5 13ZM4.5 11.5H6.5L7 13H4L4.5 11.5ZM14 13H11L11.5 11.5H13.5L14 13Z" fill="#101010" />
@@ -128,10 +189,10 @@ export default function OversightSection() {
                   </p>
                 </div>
               </div>
-              <div className="py-16 max-lg:hidden">
+              <div data-connector-left className="py-16 max-lg:hidden">
                 <Line />
               </div>
-              <div className="lg:hidden">
+              <div data-connector-left className="lg:hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" width="160" height="80" viewBox="0 0 160 80" fill="none">
                   <path opacity="0.2" d="M0.500006 0L0.500005 40L159.5 40L159.5 6.95011e-06" stroke="#033F36" />
                   <path opacity="0.2" d="M99.5 40L99.5 80" stroke="#033F36" />
@@ -139,12 +200,12 @@ export default function OversightSection() {
                 </svg>
               </div>
             </div>
-            <Image src="/phone-0.png" alt="Phone mockup" width={1000} height={800} className="object-contain object-center" />
+            <Image data-phone-reveal src="/phone-0.png" alt="Phone mockup" width={1000} height={800} className="object-contain object-center" />
             <div className="flex max-lg:flex-col gap-4 items-center lg:items-stretch">
-              <div className="py-16 max-lg:hidden">
+              <div data-connector-right className="py-16 max-lg:hidden">
                 <Line className="rotate-180" />
               </div>
-              <div className="lg:hidden">
+              <div data-connector-right className="lg:hidden">
                 <svg className="rotate-180" xmlns="http://www.w3.org/2000/svg" width="160" height="80" viewBox="0 0 160 80" fill="none">
                   <path opacity="0.2" d="M0.500006 0L0.500005 40L159.5 40L159.5 6.95011e-06" stroke="#033F36" />
                   <path opacity="0.2" d="M99.5 40L99.5 80" stroke="#033F36" />
@@ -152,7 +213,7 @@ export default function OversightSection() {
                 </svg>
               </div>
               <div className="flex lg:flex-col gap-10 justify-between">
-                <div className="flex flex-col gap-0.5">
+                <div data-feature-tier="bottom" className="flex flex-col gap-0.5">
                   <svg className="mb-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="18" height="18" rx="6" fill="white" />
                     <path d="M4.5 5H5H13H13.5V5.5V8.89062C13.2344 8.65625 12.875 8.5 12.5 8.5V6H5.5V8.5C5.10938 8.5 4.76562 8.65625 4.5 8.89062V5.5V5ZM4.5 10C4.5 9.65625 4.6875 9.32812 5 9.14062C5.29688 8.96875 5.6875 8.96875 6 9.14062C6.29688 9.32812 6.5 9.65625 6.5 10C6.5 10.3594 6.29688 10.6875 6 10.875C5.6875 11.0469 5.29688 11.0469 5 10.875C4.6875 10.6875 4.5 10.3594 4.5 10ZM8 10C8 9.65625 8.1875 9.32812 8.5 9.14062C8.79688 8.96875 9.1875 8.96875 9.5 9.14062C9.79688 9.32812 10 9.65625 10 10C10 10.3594 9.79688 10.6875 9.5 10.875C9.1875 11.0469 8.79688 11.0469 8.5 10.875C8.1875 10.6875 8 10.3594 8 10ZM12.5 9C12.8438 9 13.1719 9.20312 13.3594 9.5C13.5312 9.8125 13.5312 10.2031 13.3594 10.5C13.1719 10.8125 12.8438 11 12.5 11C12.1406 11 11.8125 10.8125 11.625 10.5C11.4531 10.2031 11.4531 9.8125 11.625 9.5C11.8125 9.20312 12.1406 9 12.5 9ZM10.5 13H7.5L8 11.5H10L10.5 13ZM4.5 11.5H6.5L7 13H4L4.5 11.5ZM14 13H11L11.5 11.5H13.5L14 13Z" fill="#101010" />
@@ -162,7 +223,7 @@ export default function OversightSection() {
                     Frameworks align with KPK, OJK, and BPK.
                   </p>
                 </div>
-                <div className="flex flex-col gap-0.5">
+                <div data-feature-tier="bottom" className="flex flex-col gap-0.5">
                   <svg className="mb-1" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="18" height="18" rx="6" fill="white" />
                     <path d="M4.5 5H5H13H13.5V5.5V8.89062C13.2344 8.65625 12.875 8.5 12.5 8.5V6H5.5V8.5C5.10938 8.5 4.76562 8.65625 4.5 8.89062V5.5V5ZM4.5 10C4.5 9.65625 4.6875 9.32812 5 9.14062C5.29688 8.96875 5.6875 8.96875 6 9.14062C6.29688 9.32812 6.5 9.65625 6.5 10C6.5 10.3594 6.29688 10.6875 6 10.875C5.6875 11.0469 5.29688 11.0469 5 10.875C4.6875 10.6875 4.5 10.3594 4.5 10ZM8 10C8 9.65625 8.1875 9.32812 8.5 9.14062C8.79688 8.96875 9.1875 8.96875 9.5 9.14062C9.79688 9.32812 10 9.65625 10 10C10 10.3594 9.79688 10.6875 9.5 10.875C9.1875 11.0469 8.79688 11.0469 8.5 10.875C8.1875 10.6875 8 10.3594 8 10ZM12.5 9C12.8438 9 13.1719 9.20312 13.3594 9.5C13.5312 9.8125 13.5312 10.2031 13.3594 10.5C13.1719 10.8125 12.8438 11 12.5 11C12.1406 11 11.8125 10.8125 11.625 10.5C11.4531 10.2031 11.4531 9.8125 11.625 9.5C11.8125 9.20312 12.1406 9 12.5 9ZM10.5 13H7.5L8 11.5H10L10.5 13ZM4.5 11.5H6.5L7 13H4L4.5 11.5ZM14 13H11L11.5 11.5H13.5L14 13Z" fill="#101010" />
