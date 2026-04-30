@@ -53,8 +53,11 @@ export default function TemplatesSection() {
         const column = index % 3;
         const startY = columnOffsets[column];
         const endY = startY + columnTravel[column];
+        const actionButtons = card.querySelectorAll<HTMLElement>("[data-template-action]");
 
         gsap.set(card, { y: startY });
+        gsap.set(actionButtons, { scale: 0, autoAlpha: 0, transformOrigin: "center center" });
+
         gsap.to(card, {
           y: endY,
           ease: "none",
@@ -63,6 +66,19 @@ export default function TemplatesSection() {
             start: "top bottom",
             end: "bottom top",
             scrub: true,
+          },
+        });
+
+        gsap.to(actionButtons, {
+          scale: 1,
+          autoAlpha: 1,
+          duration: 0.6,
+          ease: "back.out(1.6)",
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: card,
+            start: "top 50%",
+            toggleActions: "play none none reverse",
           },
         });
       });
@@ -104,14 +120,14 @@ export default function TemplatesSection() {
               </div>
             </div>
             <div className="mt-6 flex gap-2 px-5 pb-5">
-              <Link href="#" className="group rounded-[3px] bg-foreground py-1.5 px-2 text-[0.8125rem] text-background flex gap-2 items-center">
+              <Link data-template-action href="#" className="group rounded-[3px] bg-foreground py-1.5 px-2 text-[0.8125rem] text-background flex gap-2 items-center">
                 <StaggerText text="Use template" />
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect width="14" height="14" rx="7" fill="white" fillOpacity="0.1" />
                   <path d="M7.45653 4.26075V6.54336H9.73914C9.99593 6.54336 10.1957 6.74309 10.1957 6.99988C10.1957 7.25668 9.99593 7.4564 9.73914 7.4564H7.45653V9.73901C7.45653 9.99581 7.2568 10.1955 7 10.1955C6.74321 10.1955 6.54348 9.99581 6.54348 9.73901V7.4564H4.26087C4.00408 7.4564 3.80435 7.25668 3.80435 6.99988C3.80435 6.74309 4.00408 6.54336 4.26087 6.54336H6.54348V4.26075C6.54348 4.00396 6.74321 3.80423 7 3.80423C7.2568 3.80423 7.45653 4.00396 7.45653 4.26075Z" fill="white" />
                 </svg>
               </Link >
-              <Link href="#" className="group rounded-[3px] bg-background py-1.5 px-2 flex gap-2 items-center text-[0.8125rem]">
+              <Link data-template-action href="#" className="group rounded-[3px] bg-background py-1.5 px-2 flex gap-2 items-center text-[0.8125rem]">
                 <StaggerText text="See Example" />
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect width="14" height="14" rx="7" fill="#101010" fillOpacity="0.1" />

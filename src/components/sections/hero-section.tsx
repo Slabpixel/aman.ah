@@ -40,50 +40,69 @@ export default function HeroSection() {
                     duration: 0.5,
                 },
             )
-            .to(
-                "[data-hero-phone]",
-                {
-                    y: -100,
-                    scale: 1.2,
-                    duration: 1,
-                },
-                "<",
-            )
-            .to(
-                "[data-hero-phone]",
-                {
-                    scale: 1,
-                    y: 0,
-                    duration: 0.75,
-                },
-                "-=0.1",
-            )
-            .to(
-                "[data-hero-gradient]",
-                {
-                    filter: "blur(0px)",
-                    duration: 2,
-                },
-                "<",
-            ).to(
-                "[data-hero-gradient-text]",
-                {
-                    xPercent: 0,
-                    duration: 1.5,
-                    ease: "circ.inOut",
-                },
-                "0.5",
-            )
-            .fromTo(
-                "[data-hero-title]",
-                { autoAlpha: 0, y: 24, },
-                {
-                    autoAlpha: 1,
-                    y: 0,
-                    duration: 0.7,
-                },
-                ">-0.5",
-            )
+                .to(
+                    "[data-hero-phone]",
+                    {
+                        y: -100,
+                        scale: 1.2,
+                        duration: 1,
+                    },
+                    "<",
+                )
+                .to(
+                    "[data-hero-phone]",
+                    {
+                        scale: 1,
+                        y: 0,
+                        duration: 0.75,
+                    },
+                    "-=0.1",
+                )
+                .fromTo(
+                    "[data-hero-phone-mask-overlay]",
+                    { autoAlpha: 0 },
+                    {
+                        autoAlpha: 1,
+                        duration: 0.55,
+                        ease: "power2.out",
+                    },
+                )
+                .to(
+                    "[data-hero-phone-base]",
+                    {
+                        autoAlpha: 0,
+                        duration: 0.55,
+                        ease: "power2.out",
+                    },
+
+                )
+                .to(
+                    "[data-hero-gradient]",
+                    {
+                        filter: "blur(0px)",
+                        duration: 2,
+                    },
+                    "<",
+                ).fromTo(
+                    "[data-hero-gradient-text]",
+                    { xPercent: -100 },
+                    {
+                        xPercent: 0,
+                        duration: 1.5,
+                        ease: "circ.inOut",
+                    },
+                    "0.5",
+                )
+                .fromTo(
+                    "[data-hero-title]",
+                    { autoAlpha: 0, y: 24, },
+                    {
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: 0.7,
+                    },
+                    ">-0.5",
+                )
                 .fromTo(
                     "[data-hero-stores]",
                     { autoAlpha: 0, scale: 0, transformOrigin: "top" },
@@ -94,10 +113,10 @@ export default function HeroSection() {
                     },
                     "-=1.2",
                 )
-                
+
                 .fromTo(
                     "[data-hero-pills]",
-                    { 
+                    {
                         scale: 0,
                         autoAlpha: 0,
                     },
@@ -108,14 +127,28 @@ export default function HeroSection() {
                     },
                     "-=0.75",
                 );
+
+            gsap.fromTo("[data-hero-gradient-text]", { xPercent: 0 }, {
+                xPercent: 12,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: scopeRef.current,
+                    start: "bottom bottom+=10%",
+                    end: "+=100%",
+                    scrub: true,
+                },
+            });
         },
         { scope: scopeRef, dependencies: [isPreloaderDone], revertOnUpdate: true },
     );
 
     return (
-        <section ref={scopeRef} className="relative flex flex-col justify-between bg-background min-h-210 h-dvh max-h-250 px-5 lg:px-17.5 overflow-hidden">
-            <div className="relative mx-auto bg-background w-full max-w-325 border-x border-border px-4 lg:px-16 xl:px-17.5  py-30">
-                <Image src="/grid-bg.svg" alt="Grid Background" fill />
+        <section ref={scopeRef} className="relative flex flex-col justify-between bg-background min-h-210 h-dvh max-h-300 px-5 lg:px-17.5 overflow-hidden">
+            <div className="absolute pointer-events-none inset-0 z-1 flex flex-col justify-between min-h-210 h-dvh max-h-300 px-5 lg:px-17.5 overflow-hidden">
+                <div className="relative h-full mx-auto w-full max-w-325 border-x border-border px-4 lg:px-16 xl:px-17.5  py-30"></div>
+            </div>
+            <div className="relative h-full mx-auto bg-background w-full max-w-325 px-4 lg:px-16 xl:px-17.5  py-30">
+                <Image src="/grid.svg" alt="Grid Background" fill />
                 <div className="relative z-2 flex flex-col items-center gap-6">
                     <h1 data-hero-title className="relative text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[5rem] tracking-[-0.04em] text-center bg-linear-to-r from-30% from-foreground to-foreground/60 bg-clip-text text-transparent">
                         Where Every Cent
@@ -134,7 +167,7 @@ export default function HeroSection() {
                     </div>
                 </div>
             </div>
-            <div className="absolute inset-0 flex grow justify-stretch items-end">
+            <div className="absolute pointer-events-none inset-0 z-2 flex grow justify-stretch items-end">
                 <div className="relative w-full h-full flex flex-col justify-end items-center">
                     <Image data-hero-gradient src="/hero-gradient.png" alt="Hero Gradient" width={2000} height={100} className="absolute max-md:hidden h-1/2 object-cover object-top min-w-500 mx-auto" />
                     <Image data-hero-gradient src="/hero-gradient-alt.png" alt="Hero Gradient" width={768} height={100} className="absolute md:hidden h-3/5 object-cover object-top min-w-3xl mx-auto" />
@@ -170,12 +203,25 @@ export default function HeroSection() {
                         className="absolute object-contain origin-bottom mb-10 w-[90%] max-w-80 md:hidden"
                         data-hero-phone
                     />
-                    <img
-                        src="/hero-phone.png"
-                        alt="Hero Phone"
-                        className="absolute hidden object-contain w-full max-w-lg md:block md:w-[50vh]"
-                        data-hero-phone
-                    />
+                    <div className="absolute h-1/2 w-full flex justify-center">
+                        <Image
+                            data-hero-phone
+                            data-hero-phone-base
+                            width={620}
+                            height={1010}
+                            src="/hero-phone-new.png"
+                            alt="Hero Phone"
+                            className="absolute -top-16 mr-32 min-h-200 hidden md:block "
+                        />
+                        <Image
+                            data-hero-phone-mask-overlay
+                            width={620}
+                            height={1010}
+                            src="/hero-phone-new.png"
+                            alt="Hero Phone Mask"
+                            className="absolute -top-16 mr-32 min-h-200 hidden md:block mask-b-from-25% mask-b-to-56%"
+                        />
+                    </div>
                     <div className="flex px-4 max-sm:flex-col gap-1.75 md:gap-3 items-center pb-11 lg:pb-20 text-sm lg:text-base">
                         <div data-hero-pills className="flex origin-bottom-right items-center gap-2 py-1.5 pl-1.5 pr-2 md:py-2 md:pl-2.5 md:pr-3 bg-background/10 backdrop-blur-xs rounded-md">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">

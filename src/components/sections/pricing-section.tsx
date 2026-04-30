@@ -76,11 +76,12 @@ export default function PricingSection() {
         autoAlpha: 0,
         xPercent: 100,
         ease: "circ.inOut",
-        duration: 0.75,
+        duration: 1.25,
         scrollTrigger: {
           trigger: "[data-pricing-cards]",
-          start: "top 95%",
+          start: "top 65%",
           end: "bottom top",
+          toggleActions: "play none none reverse",
         },
       });
 
@@ -89,26 +90,17 @@ export default function PricingSection() {
         xPercent: -50,
         yPercent: 50,
         ease: "circ.inOut",
-        duration: 0.95,
+        duration: 1.55,
         scrollTrigger: {
           trigger: "[data-pricing-cards]",
-          start: "top 80%",
+          start: "top 65%",
           end: "bottom top",
+          toggleActions: "play none none reverse",
         },
       });
 
       return () => {
         split.revert();
-      gsap.from("[data-pricing-card='governance']", {
-        opacity: 0,
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: "[data-pricing-cards]",
-          start: "top 95%",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
       };
     },
     { scope: sectionRef, revertOnUpdate: true },
@@ -121,9 +113,9 @@ export default function PricingSection() {
           <div className="flex flex-col gap-8">
             <div className="flex max-lg:flex-col gap-4 items-center justify-between">
               <div className="overflow-hidden">
-              <h2 data-pricing-title className=" text-[2.5rem] md:text-5xl xl:text-[3.5rem] text-center lg:text-left leading-none pb-2 grow tracking-[-0.04em] text-transparent bg-linear-to-r from-28% from-foreground to-foreground/60 bg-clip-text">
-                Transparent Pricing
-              </h2>
+                <h2 data-pricing-title className=" text-[2.5rem] md:text-5xl xl:text-[3.5rem] text-center lg:text-left leading-none pb-2 grow tracking-[-0.04em] text-transparent bg-linear-to-r from-28% from-foreground to-foreground/60 bg-clip-text">
+                  Transparent Pricing
+                </h2>
               </div>
 
               <label className="inline-flex gap-6 items-center cursor-pointer">
@@ -235,13 +227,13 @@ export default function PricingSection() {
               <button className="rounded-full w-9 h-4 bg-primary cursor-pointer"></button>
               <button className="aspect-square rounded-full size-4 bg-input cursor-pointer"></button>
             </div>
-            <div className="flex flex-col max-w-200">
+            <div className="flex flex-col max-w-176">
               <div className="relative max-h-61">
-                <p data-pricing-quote className="text-5xl leading-[1.2] tracking-[-0.02em] text-foreground">Since implementing Aman.ah, our internal audit process—which used to take weeks—is now completed in hours. Transparency is no longer</p>
+                <p data-pricing-quote className="text-5xl leading-[1.2] tracking-[-0.02em] text-foreground">Since implementing Aman.ah, our internal audit process—which used to take weeks— is now completed in hours. Transparency is no longer</p>
                 <Image data-pricing-quote-image src="/woman.png" alt="woman" width={200} height={200} className="absolute -bottom-32 right-0" />
               </div>
-              <p className="mt-8 text-3xl tracking-[-0.02em]">Ayu Awaad</p>
-              <p className="text-foreground/70 mt-2 text-xl">
+              <p className="mt-7 leading-none text-2xl tracking-[-0.02em]">Ayu Awaad</p>
+              <p className="text-foreground/70 leading-none mt-3 text-lg">
                 Chief Financial Officer, CV. Abang Branang
               </p></div>
           </div>

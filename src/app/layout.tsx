@@ -6,7 +6,7 @@ import { Provider } from "@/providers/provider";
 import { RevealProvider } from "@/providers/reveal-provider";
 
 const sfPro = localFont({
-  src: "./fonts/sf-pro-medium.woff2",
+  src: "./fonts/sf-pro-display-medium.woff2",
   variable: "--font-sf-pro",
   display: "swap",
 });

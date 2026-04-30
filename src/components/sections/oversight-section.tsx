@@ -189,10 +189,10 @@ export default function OversightSection() {
                   </p>
                 </div>
               </div>
-              <div data-connector-left className="py-16 max-lg:hidden">
+              <div data-connector-left className="opacity-20 py-16 max-lg:hidden">
                 <Line />
               </div>
-              <div data-connector-left className="lg:hidden">
+              <div data-connector-left className="lg:hidden opacity-20">
                 <svg xmlns="http://www.w3.org/2000/svg" width="160" height="80" viewBox="0 0 160 80" fill="none">
                   <path opacity="0.2" d="M0.500006 0L0.500005 40L159.5 40L159.5 6.95011e-06" stroke="#033F36" />
                   <path opacity="0.2" d="M99.5 40L99.5 80" stroke="#033F36" />
@@ -202,10 +202,10 @@ export default function OversightSection() {
             </div>
             <Image data-phone-reveal src="/phone-0.png" alt="Phone mockup" width={1000} height={800} className="object-contain object-center" />
             <div className="flex max-lg:flex-col gap-4 items-center lg:items-stretch">
-              <div data-connector-right className="py-16 max-lg:hidden">
+              <div data-connector-right className="opacity-20 py-16 max-lg:hidden">
                 <Line className="rotate-180" />
               </div>
-              <div data-connector-right className="lg:hidden">
+              <div data-connector-right className="lg:hidden opacity-20">
                 <svg className="rotate-180" xmlns="http://www.w3.org/2000/svg" width="160" height="80" viewBox="0 0 160 80" fill="none">
                   <path opacity="0.2" d="M0.500006 0L0.500005 40L159.5 40L159.5 6.95011e-06" stroke="#033F36" />
                   <path opacity="0.2" d="M99.5 40L99.5 80" stroke="#033F36" />
